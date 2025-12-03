@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProActiva - Supera la Procrastinación</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FAF8F5;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F5F0E8;
+            --text-primary: #2D2A26;
+            --text-secondary: #6B6560;
+            --text-muted: #9A938C;
+            --accent-warm: #E07B54;
+            --accent-warm-light: #F5D5C8;
+            --accent-sage: #7B9E87;
+            --accent-sage-light: #D4E5D8;
+            --accent-gold: #D4A853;
+            --accent-gold-light: #F5ECD4;
+            --accent-purple: #8B7AA3;
+            --accent-purple-light: #E5DFF0;
+            --shadow-soft: 0 2px 8px rgba(45, 42, 38, 0.06);
+            --shadow-medium: 0 4px 20px rgba(45, 42, 38, 0.1);
+            --shadow-lifted: 0 8px 40px rgba(45, 42, 38, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-titles {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-top: -2px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            padding: 0.375rem;
+            border-radius: var(--radius-lg);
+        }
+
+        .nav-tab {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            background: transparent;
+            border-radius: var(--radius-md);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Welcome Section */
+        .welcome-hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-radius: var(--radius-xl);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-warm) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .principle-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .principle-card {
+            background: var(--bg-secondary);
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .principle-card.premack { border-left: 4px solid var(--accent-warm); }
+        .principle-card.pomodoro { border-left: 4px solid var(--accent-sage); }
+        .principle-card.temptation { border-left: 4px solid var(--accent-purple); }
+        .principle-card.implementation { border-left: 4px solid var(--accent-gold); }
+
+        .principle-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .premack .principle-icon { background: var(--accent-warm-light); }
+        .pomodoro .principle-icon { background: var(--accent-sage-light); }
+        .temptation .principle-icon { background: var(--accent-purple-light); }
+        .implementation .principle-icon { background: var(--accent-gold-light); }
+
+        .principle-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .principle-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Assessment Section */
+        .assessment-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .assessment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .assessment-header h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .assessment-header p {
+            color: var(--text-secondary);
+        }
+
+        .progress-bar-container {
+            background: var(--bg-tertiary);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-warm), var(--accent-gold));
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        .question-container {
+            min-height: 300px;
+        }
+
+        .question {
+            display: none;
+            animation: slideIn 0.4s ease;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-warm-light);
+            color: var(--accent-warm);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-tertiary);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-warm-light);
+        }
+
+        .option-btn.selected {
+            background: var(--accent-warm-light);
+            border-color: var(--accent-warm);
+        }
+
+        .option-circle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .option-btn.selected .option-circle {
+            background: var(--accent-warm);
+            border-color: var(--accent-warm);
+        }
+
+        .option-btn.selected .option-circle::after {
+            content: '✓';
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .option-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--bg-tertiary);
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-primary);
+        }
+
+        /* Results Section */
+        .results-container {
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .results-summary {
+            background: linear-gradient(135deg, var(--accent-warm-light), var(--accent-gold-light));
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .results-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .causes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .cause-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cause-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .cause-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .cause-card.high .cause-icon { background: #FEE2E2; }
+        .cause-card.medium .cause-icon { background: #FEF3C7; }
+        .cause-card.low .cause-icon { background: #D1FAE5; }
+
+        .cause-level {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .cause-card.high .cause-level { background: #FEE2E2; color: #B91C1C; }
+        .cause-card.medium .cause-level { background: #FEF3C7; color: #B45309; }
+        .cause-card.low .cause-level { background: #D1FAE5; color: #047857; }
+
+        .cause-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cause-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Premack Section */
+        .premack-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .premack-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .premack-panel {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .panel-icon.tasks { background: var(--accent-sage-light); }
+        .panel-icon.rewards { background: var(--accent-gold-light); }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.25s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-warm);
+        }
+
+        .add-btn {
+            padding: 0.875rem 1.25rem;
+            background: var(--accent-sage);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.25s ease;
+        }
+
+        .add-btn:hover {
+            background: #6B8E77;
+        }
+
+        .add-btn.reward {
+            background: var(--accent-gold);
+        }
+
+        .add-btn.reward:hover {
+            background: #C49943;
+        }
+
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            transition: all 0.25s ease;
+        }
+
+        .list-item:hover {
+            background: var(--bg-primary);
+        }
+
+        .item-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--text-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .item-checkbox.checked {
+            background: var(--accent-sage);
+            border-color: var(--accent-sage);
+        }
+
+        .item-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .item-text {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .item-text.completed {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .list-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Pairing Section */
+        .pairing-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .pairing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pairing-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pairing-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .pairing-formula {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-warm-light), var(--accent-gold-light));
+            border-radius: var(--radius-lg);
+            flex-wrap: wrap;
+        }
+
+        .pairing-box {
+            padding: 1rem 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .pairing-box.task {
+            border: 2px solid var(--accent-sage);
+        }
+
+        .pairing-box.reward {
+            border: 2px solid var(--accent-gold);
+        }
+
+        .pairing-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .pairing-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .pairing-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-warm);
+        }
+
+        .generate-btn {
+            display: block;
+            margin: 1.5rem auto 0;
+            padding: 1rem 2rem;
+        }
+
+        /* Strategies Section */
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .strategy-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .strategy-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .strategy-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+
+        .strategy-card:nth-child(1) .strategy-icon { background: var(--accent-warm-light); }
+        .strategy-card:nth-child(2) .strategy-icon { background: var(--accent-sage-light); }
+        .strategy-card:nth-child(3) .strategy-icon { background: var(--accent-purple-light); }
+        .strategy-card:nth-child(4) .strategy-icon { background: var(--accent-gold-light); }
+
+        .strategy-title h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .strategy-title p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .strategy-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .strategy-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-warm);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Timer Section */
+        .timer-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+        }
+
+        .timer-display {
+            font-family: 'Fraunces', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .timer-btn {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.25s ease;
+        }
+
+        .timer-btn.play {
+            background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
+            color: white;
+        }
+
+        .timer-btn.play:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .timer-btn.pause {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .timer-btn.pause:hover {
+            background: var(--bg-primary);
+        }
+
+        .timer-btn.reset {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .timer-presets {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            padding: 0.625rem 1.25rem;
+            border: 2px solid var(--bg-tertiary);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .preset-btn:hover {
+            border-color: var(--accent-warm);
+            color: var(--accent-warm);
+        }
+
+        .preset-btn.active {
+            background: var(--accent-warm);
+            border-color: var(--accent-warm);
+            color: white;
+        }
+
+        /* Commitment Section */
+        .commitment-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .commitment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .commitment-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-hint {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.25s ease;
+            background: var(--bg-secondary);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-warm);
+        }
+
+        .commitment-preview {
+            background: linear-gradient(135deg, var(--accent-warm-light), var(--accent-gold-light));
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1rem;
+        }
+
+        .commitment-preview h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .commitment-text {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .commitment-text strong {
+            color: var(--accent-warm);
+        }
+
+        /* Empty States */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .welcome-hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .timer-display {
+                font-size: 3.5rem;
+            }
+
+            .main-container {
+                padding: 1rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-titles">
+                    <span class="logo-text">ProActiva</span>
+                    <span class="logo-subtitle">CentroRol de Psicología Aplicada</span>
+                </div>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-section="home">Inicio</button>
+                <button class="nav-tab" data-section="assessment">Evaluación</button>
+                <button class="nav-tab" data-section="premack">Premack</button>
+                <button class="nav-tab" data-section="strategies">Estrategias</button>
+                <button class="nav-tab" data-section="timer">Pomodoro</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="welcome-hero">
+                <h1>Transforma tu relación con las tareas</h1>
+                <p>ProActiva utiliza principios conductuales basados en evidencia para ayudarte a comprender y superar la procrastinación de manera efectiva.</p>
+                <button class="btn btn-primary" onclick="showSection('assessment')">
+                    Comenzar evaluación →
+                </button>
+            </div>
+
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">Principios fundamentales</h2>
+            
+            <div class="principle-cards">
+                <div class="principle-card premack">
+                    <div class="principle-icon">🔄</div>
+                    <h3>Principio de Premack</h3>
+                    <p>Usa conductas de alta probabilidad como reforzadores de conductas de baja probabilidad. Primero la tarea difícil, luego la recompensa.</p>
+                </div>
+                
+                <div class="principle-card pomodoro">
+                    <div class="principle-icon">🍅</div>
+                    <h3>Técnica Pomodoro</h3>
+                    <p>Divide el trabajo en intervalos de 25 minutos con descansos. Reduce la resistencia inicial al hacer las tareas más manejables.</p>
+                </div>
+                
+                <div class="principle-card temptation">
+                    <div class="principle-icon">🎯</div>
+                    <h3>Temptation Bundling</h3>
+                    <p>Combina actividades que "debes" hacer con actividades que "quieres" hacer para aumentar la motivación intrínseca.</p>
+                </div>
+                
+                <div class="principle-card implementation">
+                    <div class="principle-icon">📋</div>
+                    <h3>Intención de Implementación</h3>
+                    <p>Especifica cuándo, dónde y cómo realizarás una tarea. Los planes "si-entonces" aumentan significativamente la probabilidad de acción.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Section -->
+        <section id="assessment" class="section">
+            <div class="assessment-container">
+                <div class="assessment-header">
+                    <h2>Identifica tus patrones de procrastinación</h2>
+                    <p>Este cuestionario te ayudará a identificar las causas subyacentes de tu procrastinación</p>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+
+                <div class="question-container" id="questionContainer">
+                    <!-- Questions will be dynamically inserted -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                        Siguiente →
+                    </button>
+                </div>
+
+                <div class="results-container" id="resultsContainer">
+                    <div class="results-summary">
+                        <h2>Tu perfil de procrastinación</h2>
+                        <p>Basado en tus respuestas, estas son las principales áreas a trabajar:</p>
+                    </div>
+                    <div class="causes-grid" id="causesGrid">
+                        <!-- Results will be dynamically inserted -->
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="showSection('strategies')">
+                            Ver estrategias recomendadas →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premack Section -->
+        <section id="premack" class="section">
+            <div class="premack-container">
+                <div class="premack-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon tasks">📝</div>
+                        <div>
+                            <h3>Tareas pendientes</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">Conductas de baja probabilidad</p>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="taskInput" placeholder="Añade una tarea..." onkeypress="if(event.key==='Enter')addTask()">
+                        <button class="add-btn" onclick="addTask()">+</button>
+                    </div>
+                    <div class="items-list" id="tasksList">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📋</div>
+                            <p>Añade las tareas que estás postergando</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="premack-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon rewards">🎁</div>
+                        <div>
+                            <h3>Recompensas</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">Conductas de alta probabilidad</p>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="rewardInput" placeholder="Añade una recompensa..." onkeypress="if(event.key==='Enter')addReward()">
+                        <button class="add-btn reward" onclick="addReward()">+</button>
+                    </div>
+                    <div class="items-list" id="rewardsList">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🎯</div>
+                            <p>Añade actividades que disfrutas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pairing-section">
+                <div class="pairing-header">
+                    <h3>Emparejamiento Premack</h3>
+                    <p>Genera un contrato conductual: completa una tarea para desbloquear tu recompensa</p>
+                </div>
+                <div class="pairing-formula" id="pairingFormula">
+                    <div class="pairing-box task">
+                        <div class="pairing-label">Primero</div>
+                        <div class="pairing-value" id="pairedTask">Selecciona una tarea</div>
+                    </div>
+                    <div class="pairing-arrow">→</div>
+                    <div class="pairing-box reward">
+                        <div class="pairing-label">Después</div>
+                        <div class="pairing-value" id="pairedReward">Selecciona una recompensa</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary generate-btn" onclick="generatePairing()">
+                    🎲 Generar emparejamiento aleatorio
+                </button>
+            </div>
+        </section>
+
+        <!-- Strategies Section -->
+        <section id="strategies" class="section">
+            <h2 style="margin-bottom: 1.5rem;">Estrategias basadas en evidencia</h2>
+            
+            <div class="strategies-grid">
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-icon">🧠</div>
+                        <div class="strategy-title">
+                            <h3>Reestructuración Cognitiva</h3>
+                            <p>Modifica pensamientos disfuncionales</p>
+                        </div>
+                    </div>
+                    <div class="strategy-content">
+                        <p>La procrastinación a menudo se mantiene por distorsiones cognitivas como el catastrofismo ("será terrible") o la minimización ("no importa tanto").</p>
+                        <div class="strategy-steps">
+                            <div class="strategy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Identifica el pensamiento automático negativo sobre la tarea</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Evalúa la evidencia a favor y en contra</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Genera un pensamiento alternativo más equilibrado</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-icon">⚡</div>
+                        <div class="strategy-title">
+                            <h3>Regla de los 2 Minutos</h3>
+                            <p>Supera la inercia inicial</p>
+                        </div>
+                    </div>
+                    <div class="strategy-content">
+                        <p>La mayor barrera es empezar. Una vez iniciada la acción, la motivación aumenta por el efecto Zeigarnik (tendencia a recordar tareas incompletas).</p>
+                        <div class="strategy-steps">
+                            <div class="strategy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Si una tarea toma menos de 2 minutos, hazla inmediatamente</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Para tareas largas, comprométete solo a trabajar 2 minutos</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Después de 2 minutos, decide si continúas (normalmente lo harás)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-icon">🎭</div>
+                        <div class="strategy-title">
+                            <h3>Aceptación y Compromiso</h3>
+                            <p>Enfoque ACT para la procrastinación</p>
+                        </div>
+                    </div>
+                    <div class="strategy-content">
+                        <p>En lugar de luchar contra las emociones incómodas, acéptalas mientras actúas según tus valores. La incomodidad no tiene que detener la acción.</p>
+                        <div class="strategy-steps">
+                            <div class="strategy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Nota la resistencia sin juzgarla ("Noto que no quiero hacer esto")</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Conecta con tu valor subyacente (¿por qué importa esta tarea?)</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Actúa con la incomodidad presente, no a pesar de ella</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-icon">📐</div>
+                        <div class="strategy-title">
+                            <h3>Diseño del Entorno</h3>
+                            <p>Arquitectura de decisiones</p>
+                        </div>
+                    </div>
+                    <div class="strategy-content">
+                        <p>Modifica tu entorno para que la acción deseada sea más fácil y la procrastinación más difícil. Reduce la fricción para lo productivo.</p>
+                        <div class="strategy-steps">
+                            <div class="strategy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Elimina distracciones (teléfono en otra habitación, bloqueadores)</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Prepara el entorno la noche anterior (materiales listos)</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Crea señales ambientales asociadas al trabajo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment Contract -->
+            <div class="commitment-card" style="margin-top: 2rem;">
+                <div class="commitment-header">
+                    <h3>Intención de Implementación</h3>
+                    <p style="color: var(--text-secondary);">Crea un plan específico si-entonces para aumentar la probabilidad de acción</p>
+                </div>
+                <div class="commitment-form">
+                    <div class="form-group">
+                        <label class="form-label">¿Qué tarea específica vas a realizar?</label>
+                        <input type="text" class="form-input" id="commitTask" placeholder="Ej: Escribir el primer borrador del informe" oninput="updateCommitment()">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">¿Cuándo? (día y hora)</label>
+                            <input type="text" class="form-input" id="commitWhen" placeholder="Ej: Mañana a las 9:00" oninput="updateCommitment()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">¿Dónde?</label>
+                            <input type="text" class="form-input" id="commitWhere" placeholder="Ej: En mi escritorio de casa" oninput="updateCommitment()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">¿Cuál será tu señal de inicio?</label>
+                        <span class="form-hint">Una acción específica que desencadene el comportamiento</span>
+                        <input type="text" class="form-input" id="commitCue" placeholder="Ej: Después de terminar mi café de la mañana" oninput="updateCommitment()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">¿Qué obstáculo podría surgir y cómo lo enfrentarás?</label>
+                        <textarea class="form-textarea" id="commitObstacle" placeholder="Ej: Si me siento abrumado, empezaré solo con el esquema durante 5 minutos" oninput="updateCommitment()"></textarea>
+                    </div>
+                </div>
+                <div class="commitment-preview">
+                    <h4>Tu compromiso</h4>
+                    <p class="commitment-text" id="commitmentText">
+                        Completa los campos para generar tu intención de implementación personalizada.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timer Section -->
+        <section id="timer" class="section">
+            <div class="timer-container">
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="timer-label" id="timerLabel">Tiempo de trabajo</div>
+                <div class="timer-controls">
+                    <button class="timer-btn pause" onclick="resetTimer()">↺</button>
+                    <button class="timer-btn play" id="playBtn" onclick="toggleTimer()">▶</button>
+                </div>
+                <div class="timer-presets">
+                    <button class="preset-btn active" onclick="setPreset(25, 'Pomodoro clásico', this)">25 min</button>
+                    <button class="preset-btn" onclick="setPreset(15, 'Sprint corto', this)">15 min</button>
+                    <button class="preset-btn" onclick="setPreset(50, 'Sesión profunda', this)">50 min</button>
+                    <button class="preset-btn" onclick="setPreset(5, 'Descanso corto', this)">5 min ☕</button>
+                </div>
+            </div>
+
+            <div class="strategies-grid">
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-icon">🍅</div>
+                        <div class="strategy-title">
+                            <h3>Cómo usar Pomodoro</h3>
+                            <p>Técnica de Francesco Cirillo</p>
+                        </div>
+                    </div>
+                    <div class="strategy-content">
+                        <div class="strategy-steps">
+                            <div class="strategy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Elige una tarea específica a realizar</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Trabaja 25 minutos sin interrupciones</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Toma un descanso de 5 minutos</div>
+                            </div>
+                            <div class="strategy-step">
+                                <div class="step-number">4</div>
+                                <div class="step-text">Cada 4 pomodoros, descansa 15-30 min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <div class="strategy-icon">💡</div>
+                        <div class="strategy-title">
+                            <h3>Por qué funciona</h3>
+                            <p>Base científica</p>
+                        </div>
+                    </div>
+                    <div class="strategy-content">
+                        <p style="margin-bottom: 1rem;"><strong>Reduce la aversión a la tarea:</strong> Un período finito es menos intimidante que "trabajar hasta terminar".</p>
+                        <p style="margin-bottom: 1rem;"><strong>Aprovecha la atención limitada:</strong> Nuestra capacidad de concentración óptima dura ~25-50 minutos.</p>
+                        <p><strong>Crea urgencia artificial:</strong> El temporizador activa el sistema de alerta, aumentando el enfoque.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ==================== Navigation ====================
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        }
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => showSection(tab.dataset.section));
+        });
+
+        // ==================== Assessment ====================
+        const questions = [
+            {
+                category: "Aversión a la tarea",
+                question: "¿Con qué frecuencia evitas tareas porque te parecen aburridas o desagradables?",
+                options: [
+                    { text: "Casi nunca - puedo hacer tareas incluso si no me gustan", score: 1 },
+                    { text: "A veces - depende de qué tan aburrida sea la tarea", score: 2 },
+                    { text: "Frecuentemente - las tareas aburridas me cuestan mucho", score: 3 },
+                    { text: "Casi siempre - evito activamente cualquier tarea desagradable", score: 4 }
+                ],
+                factor: "aversion"
+            },
+            {
+                category: "Miedo al fracaso",
+                question: "Cuando tienes una tarea importante, ¿sientes ansiedad por no hacerla lo suficientemente bien?",
+                options: [
+                    { text: "Raramente - acepto que no todo será perfecto", score: 1 },
+                    { text: "A veces - en tareas muy importantes", score: 2 },
+                    { text: "Frecuentemente - me preocupa decepcionar a otros", score: 3 },
+                    { text: "Constantemente - el miedo a fallar me paraliza", score: 4 }
+                ],
+                factor: "fear"
+            },
+            {
+                category: "Perfeccionismo",
+                question: "¿Retrases empezar tareas porque sientes que las condiciones no son las ideales?",
+                options: [
+                    { text: "No - empiezo aunque no sea el momento perfecto", score: 1 },
+                    { text: "Ocasionalmente - si hay muchas distracciones", score: 2 },
+                    { text: "Frecuentemente - necesito que todo esté ordenado primero", score: 3 },
+                    { text: "Siempre - espero el momento y estado de ánimo perfectos", score: 4 }
+                ],
+                factor: "perfectionism"
+            },
+            {
+                category: "Dificultad con la autorregulación",
+                question: "¿Te cuesta resistir distracciones como el teléfono o redes sociales cuando debes trabajar?",
+                options: [
+                    { text: "Puedo mantener el enfoque sin problemas", score: 1 },
+                    { text: "Me distraigo algo pero retomo rápido", score: 2 },
+                    { text: "Las distracciones frecuentemente interrumpen mi trabajo", score: 3 },
+                    { text: "Pierdo horas en distracciones antes de darme cuenta", score: 4 }
+                ],
+                factor: "selfregulation"
+            },
+            {
+                category: "Sensibilidad a la demora de recompensas",
+                question: "¿Prefieres recompensas inmediatas aunque sepas que esperar traería mejores resultados?",
+                options: [
+                    { text: "Puedo esperar fácilmente por recompensas mayores", score: 1 },
+                    { text: "Depende - a veces elijo lo inmediato", score: 2 },
+                    { text: "Frecuentemente elijo la gratificación inmediata", score: 3 },
+                    { text: "Casi siempre - lo inmediato es irresistible", score: 4 }
+                ],
+                factor: "delaysensitivity"
+            },
+            {
+                category: "Falta de claridad",
+                question: "¿Con qué frecuencia evitas tareas porque no sabes exactamente cómo empezar o qué hacer?",
+                options: [
+                    { text: "Raramente - suelo tener claro el camino", score: 1 },
+                    { text: "A veces - en tareas nuevas o complejas", score: 2 },
+                    { text: "Frecuentemente - la ambigüedad me frena", score: 3 },
+                    { text: "Muy frecuentemente - necesito instrucciones claras", score: 4 }
+                ],
+                factor: "clarity"
+            },
+            {
+                category: "Agotamiento / Bajo nivel de energía",
+                question: "¿Postergas tareas porque sientes que no tienes la energía necesaria para realizarlas?",
+                options: [
+                    { text: "Raramente - manejo bien mi energía", score: 1 },
+                    { text: "A veces - especialmente al final del día", score: 2 },
+                    { text: "Frecuentemente - me siento agotado/a", score: 3 },
+                    { text: "Casi siempre - la fatiga domina mi día", score: 4 }
+                ],
+                factor: "energy"
+            },
+            {
+                category: "Rebeldía / Reactancia",
+                question: "¿Evitas hacer tareas porque sientes que te las están imponiendo o no tienes elección?",
+                options: [
+                    { text: "No - hago lo que debo sin resistencia", score: 1 },
+                    { text: "Ocasionalmente - si siento mucha presión", score: 2 },
+                    { text: "Frecuentemente - no me gusta que me digan qué hacer", score: 3 },
+                    { text: "Muy frecuentemente - reacciono retrasando a propósito", score: 4 }
+                ],
+                factor: "reactance"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+
+        function renderQuestion() {
+            const container = document.getElementById('questionContainer');
+            const q = questions[currentQuestion];
+            
+            container.innerHTML = `
+                <div class="question active">
+                    <span class="question-category">${q.category}</span>
+                    <h3>${q.question}</h3>
+                    <div class="options-grid">
+                        ${q.options.map((opt, idx) => `
+                            <div class="option-btn ${answers[currentQuestion] === idx ? 'selected' : ''}" onclick="selectOption(${idx})">
+                                <div class="option-circle"></div>
+                                <span class="option-text">${opt.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            updateProgress();
+            updateButtons();
+        }
+
+        function selectOption(idx) {
+            answers[currentQuestion] = idx;
+            document.querySelectorAll('.option-btn').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === idx);
+            });
+            updateButtons();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.disabled = answers[currentQuestion] === undefined;
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Ver resultados →' : 'Siguiente →';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('questionContainer').style.display = 'none';
+            document.querySelector('.nav-buttons').style.display = 'none';
+            document.querySelector('.progress-bar-container').style.display = 'none';
+            
+            const factors = {};
+            questions.forEach((q, idx) => {
+                const score = q.options[answers[idx]].score;
+                factors[q.factor] = { score, category: q.category };
+            });
+
+            const factorInfo = {
+                aversion: { icon: '😤', description: 'Tiendes a evitar tareas que percibes como aburridas o desagradables. Estrategia: Usa el Principio de Premack y temptation bundling.' },
+                fear: { icon: '😰', description: 'El miedo al fracaso o a no cumplir expectativas te paraliza. Estrategia: Reestructuración cognitiva y autocompasión.' },
+                perfectionism: { icon: '✨', description: 'Esperas condiciones perfectas que nunca llegan. Estrategia: Establece estándares "suficientemente buenos" y comienza imperfectamente.' },
+                selfregulation: { icon: '📱', description: 'Las distracciones capturan tu atención fácilmente. Estrategia: Diseño del entorno y técnica Pomodoro.' },
+                delaysensitivity: { icon: '🎯', description: 'Prefieres recompensas inmediatas sobre beneficios futuros. Estrategia: Principio de Premack y recompensas intermedias.' },
+                clarity: { icon: '🤔', description: 'La ambigüedad sobre qué hacer te frena. Estrategia: Divide tareas en pasos concretos y específicos.' },
+                energy: { icon: '🔋', description: 'El agotamiento reduce tu capacidad de acción. Estrategia: Gestión de energía, no solo de tiempo.' },
+                reactance: { icon: '🚫', description: 'Resistes tareas que sientes impuestas. Estrategia: Encuentra autonomía y propósito personal en las tareas.' }
+            };
+
+            const sorted = Object.entries(factors).sort((a, b) => b[1].score - a[1].score);
+            
+            const resultsHTML = sorted.map(([factor, data]) => {
+                const level = data.score >= 3 ? 'high' : data.score >= 2 ? 'medium' : 'low';
+                const levelText = data.score >= 3 ? 'Alto' : data.score >= 2 ? 'Moderado' : 'Bajo';
+                const info = factorInfo[factor];
+                
+                return `
+                    <div class="cause-card ${level}">
+                        <div class="cause-header">
+                            <div class="cause-icon">${info.icon}</div>
+                            <span class="cause-level">${levelText}</span>
+                        </div>
+                        <h4>${data.category}</h4>
+                        <p>${info.description}</p>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('causesGrid').innerHTML = resultsHTML;
+            document.getElementById('resultsContainer').classList.add('active');
+        }
+
+        // Initialize assessment
+        renderQuestion();
+
+        // ==================== Premack Lists ====================
+        let tasks = [];
+        let rewards = [];
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const value = input.value.trim();
+            if (value) {
+                tasks.push({ text: value, completed: false });
+                input.value = '';
+                renderTasks();
+            }
+        }
+
+        function addReward() {
+            const input = document.getElementById('rewardInput');
+            const value = input.value.trim();
+            if (value) {
+                rewards.push({ text: value });
+                input.value = '';
+                renderRewards();
+            }
+        }
+
+        function renderTasks() {
+            const list = document.getElementById('tasksList');
+            if (tasks.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <p>Añade las tareas que estás postergando</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = tasks.map((task, idx) => `
+                <div class="list-item">
+                    <div class="item-checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask(${idx})"></div>
+                    <span class="item-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+                    <button class="delete-btn" onclick="deleteTask(${idx})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        function renderRewards() {
+            const list = document.getElementById('rewardsList');
+            if (rewards.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎯</div>
+                        <p>Añade actividades que disfrutas</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = rewards.map((reward, idx) => `
+                <div class="list-item">
+                    <span class="item-text" style="padding-left: 0.5rem;">🎁 ${reward.text}</span>
+                    <button class="delete-btn" onclick="deleteReward(${idx})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        function toggleTask(idx) {
+            tasks[idx].completed = !tasks[idx].completed;
+            renderTasks();
+        }
+
+        function deleteTask(idx) {
+            tasks.splice(idx, 1);
+            renderTasks();
+        }
+
+        function deleteReward(idx) {
+            rewards.splice(idx, 1);
+            renderRewards();
+        }
+
+        function generatePairing() {
+            const incompleteTasks = tasks.filter(t => !t.completed);
+            if (incompleteTasks.length === 0 || rewards.length === 0) {
+                alert('Añade al menos una tarea pendiente y una recompensa');
+                return;
+            }
+            
+            const randomTask = incompleteTasks[Math.floor(Math.random() * incompleteTasks.length)];
+            const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+            
+            document.getElementById('pairedTask').textContent = randomTask.text;
+            document.getElementById('pairedReward').textContent = randomReward.text;
+        }
+
+        // ==================== Timer ====================
+        let timerMinutes = 25;
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            const display = document.getElementById('timerDisplay');
+            display.textContent = `${String(timerMinutes).padStart(2, '0')}:${String(timerSeconds).padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('playBtn');
+            if (isRunning) {
+                clearInterval(timerInterval);
+                btn.textContent = '▶';
+                isRunning = false;
+            } else {
+                timerInterval = setInterval(() => {
+                    if (timerSeconds === 0) {
+                        if (timerMinutes === 0) {
+                            clearInterval(timerInterval);
+                            isRunning = false;
+                            btn.textContent = '▶';
+                            playAlarm();
+                            return;
+                        }
+                        timerMinutes--;
+                        timerSeconds = 59;
+                    } else {
+                        timerSeconds--;
+                    }
+                    updateTimerDisplay();
+                }, 1000);
+                btn.textContent = '⏸';
+                isRunning = true;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            document.getElementById('playBtn').textContent = '▶';
+            const activePreset = document.querySelector('.preset-btn.active');
+            const minutes = parseInt(activePreset.textContent);
+            timerMinutes = minutes;
+            timerSeconds = 0;
+            updateTimerDisplay();
+        }
+
+        function setPreset(minutes, label, btn) {
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('timerLabel').textContent = label;
+            
+            clearInterval(timerInterval);
+            isRunning = false;
+            document.getElementById('playBtn').textContent = '▶';
+            timerMinutes = minutes;
+            timerSeconds = 0;
+            updateTimerDisplay();
+        }
+
+        function playAlarm() {
+            // Simple beep using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            gainNode.gain.value = 0.3;
+            
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), 500);
+            
+            alert('¡Tiempo completado! 🎉');
+        }
+
+        // ==================== Commitment ====================
+        function updateCommitment() {
+            const task = document.getElementById('commitTask').value;
+            const when = document.getElementById('commitWhen').value;
+            const where = document.getElementById('commitWhere').value;
+            const cue = document.getElementById('commitCue').value;
+            const obstacle = document.getElementById('commitObstacle').value;
+
+            let text = '';
+            
+            if (task && when && where && cue) {
+                text = `<strong>${cue}</strong>, voy a <strong>${task}</strong> `;
+                text += `<strong>${when}</strong> en <strong>${where}</strong>.`;
+                
+                if (obstacle) {
+                    text += `<br><br>Si encuentro obstáculos: <strong>${obstacle}</strong>`;
+                }
+            } else {
+                text = 'Completa los campos para generar tu intención de implementación personalizada.';
+            }
+            
+            document.getElementById('commitmentText').innerHTML = text;
+        }
+    </script>
+</body>
+</html>
